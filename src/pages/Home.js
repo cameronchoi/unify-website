@@ -4,8 +4,6 @@ import { FaUserFriends } from 'react-icons/fa'
 
 import StartButton from '../components/UI/StartButton'
 
-import { Link } from 'react-router-dom'
-
 import Colours from '../constants/colours'
 
 const useStyles = createUseStyles({
@@ -21,13 +19,10 @@ const useStyles = createUseStyles({
     flex: 5,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'center'
   },
   logoTitle: {
-    color: 'white',
-    fontSize: 40,
-    margin: 0
+    color: 'white'
   },
   buttons: {
     flex: 2,
@@ -51,18 +46,7 @@ export default function StartUpScreen ({ navigation }) {
 
   return (
     <div className={classes.container}>
-      <div className={classes.logo}>
-        <FaUserFriends size={90} color='white' />
-        <h1 className={classes.logoTitle}>unify</h1>
-      </div>
-      <div className={classes.buttons}>
-        <Link to='/signin'>
-          <StartButton className={classes.signInButton}>Sign in</StartButton>
-        </Link>
-        <Link to='/signup-email'>
-          <StartButton className={classes.signUpButton}>Sign up</StartButton>
-        </Link>
-      </div>
+      <h1>Not converted over yet...</h1>
     </div>
   )
 }
