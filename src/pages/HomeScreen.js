@@ -8,7 +8,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import Colours from "../constants/colours";
 import baseUrl from "../constants/baseUrl";
 
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Dialog, Slide } from "@material-ui/core";
 
 import StartButton from "../components/StartButton";
 import Footer from "../components/Footer";
@@ -37,18 +37,50 @@ const useStyles = createUseStyles({
   title: {
     fontSize: 30,
   },
+  modalContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "70%",
+  },
+  modalText: {
+    color: "white",
+    fontSize: 20,
+    margin: "20px 0px",
+  },
+  messageButton: {
+    backgroundColor: Colours.primary,
+    color: "white",
+    marginTop: 20,
+    marginBottom: 30,
+  },
+  homeButton: {
+    backgroundColor: "transparent",
+    color: Colours.primary,
+    borderColor: Colours.primary,
+    borderStyle: "solid",
+    borderWidth: 1,
+    marginBottom: 20,
+  },
+});
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function HomeScreen({ navigation }) {
   const classes = useStyles();
   const [state] = useContext(AuthContext);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const [fullName, setFullName] = useState("");
   const [uri, setUri] = useState("");
 
   const onPressHandler = () => {
     setLoading(true);
+    setOpen(true);
+    setLoading(false);
     // console.log(matchByDegree);
     // console.log(matchBySubject);
     // console.log(matchByPersonality);
@@ -92,8 +124,50 @@ export default function HomeScreen({ navigation }) {
     //   });
   };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Div100vh className={classes.mainContainer}>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+        PaperProps={{
+          style: {
+            backgroundColor: "black",
+            opacity: 0.95,
+            boxShadow: "none",
+          },
+        }}
+      >
+        <Div100vh className={classes.modalContainer}>
+          <div className={classes.modalText}>You have matched with...</div>
+          <Avatar
+            style={{ width: 200, height: 200, marginBottom: 25 }}
+            avatarStyle="Circle"
+            topType="LongHairMiaWallace"
+            accessoriesType="Prescription02"
+            hairColor="BrownDark"
+            facialHairType="Blank"
+            clotheType="Hoodie"
+            clotheColor="PastelBlue"
+            eyeType="Happy"
+            eyebrowType="Default"
+            mouthType="Smile"
+            skinColor="Light"
+          />
+          <div className={classes.modalText}>Bob Smith</div>
+          <StartButton className={classes.messageButton}>
+            Send them a message
+          </StartButton>
+          <StartButton className={classes.homeButton} onClick={handleClose}>
+            Go back to home screen
+          </StartButton>
+        </Div100vh>
+      </Dialog>
       <Header />
       <div className={classes.contentContainer}>
         <div className={classes.title}>Hi, Cameron!</div>

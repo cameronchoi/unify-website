@@ -8,6 +8,7 @@ const useStyles = createUseStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    borderBottom: "1px solid #E8E8E8",
   },
   title: {
     fontSize: 20,
