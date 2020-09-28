@@ -1,24 +1,44 @@
 import React, { useState, useContext } from "react";
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ActivityIndicator,
-} from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
-import Card from "../components/UI/Card";
-import NormalText from "../components/UI/NormalText";
-import MatchCriteria from "../components/UI/MatchCriteria";
-import MatchModal from "../components/UI/MatchModal";
+import Avatar from "avataaars";
+import Header from "../components/Header";
+import { createUseStyles } from "react-jss";
 
-import { MatchContext } from "../context/MatchContext";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 import Colours from "../constants/colours";
 import baseUrl from "../constants/baseUrl";
 
+import { CircularProgress } from "@material-ui/core";
+
+import StartButton from "../components/StartButton";
+import Footer from "../components/Footer";
+
+const useStyles = createUseStyles({
+  mainContainer: {
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+  contentContainer: {
+    display: "flex",
+    height: "60%",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  matchButton: {
+    backgroundColor: Colours.primary,
+    color: "white",
+    fontSize: 25,
+  },
+  title: {
+    fontSize: 30,
+  },
+});
+
 export default function HomeScreen({ navigation }) {
-  const [matchState, matchDispatch] = useContext(MatchContext);
+  const classes = useStyles();
   const [state] = useContext(AuthContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [matchByDegree, setMatchByDegree] = useState(true);
@@ -55,13 +75,13 @@ export default function HomeScreen({ navigation }) {
         } else {
           let fullName = `${resData.result.firstName} ${resData.result.lastName}`;
           let uri = `https://avataaars.io/png?topType=${resData.result.avatar.topType}&hairColor=${resData.result.avatar.hairColour}&clotheType=${resData.result.avatar.clotheType}&skinColor=${resData.result.avatar.skinColour}&avatarStyle=Circle`;
-          matchDispatch({
-            type: "SET_MATCH",
-            email: resData.result.email,
-            fullName,
-            id: resData.id,
-            uri,
-          });
+          //   matchDispatch({
+          //     type: "SET_MATCH",
+          //     email: resData.result.email,
+          //     fullName,
+          //     id: resData.id,
+          //     uri,
+          //   });
           setFullName(fullName);
           setUri(uri);
           setLoading(false);
@@ -74,107 +94,33 @@ export default function HomeScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <MatchModal
-        fullName={fullName}
-        uri={uri}
-        modalOpen={modalOpen}
-        sendMessageHandler={() => {
-          navigation.navigate("Matches");
-          navigation.navigate("Messaging");
-          setModalOpen(false);
-        }}
-        backHandler={() => {
-          setModalOpen(false);
-        }}
-      />
-
-      <View style={styles.criteriaContainer}>
-        <MatchCriteria
-          isEnabled={matchByDegree}
-          setIsEnabled={setMatchByDegree}
-          title="Match by degree"
-          style={styles.criteria}
-          textStyle={{ fontSize: 15 }}
+    <div className={classes.mainContainer}>
+      <Header />
+      <div className={classes.contentContainer}>
+        <div className={classes.title}>Hi, Cameron!</div>
+        <Avatar
+          style={{ width: 250, height: 250, marginBottom: 25 }}
+          avatarStyle="Circle"
+          topType="LongHairMiaWallace"
+          accessoriesType="Prescription02"
+          hairColor="BrownDark"
+          facialHairType="Blank"
+          clotheType="Hoodie"
+          clotheColor="PastelBlue"
+          eyeType="Happy"
+          eyebrowType="Default"
+          mouthType="Smile"
+          skinColor="Light"
         />
-        <MatchCriteria
-          isEnabled={matchBySubject}
-          setIsEnabled={setMatchBySubject}
-          title="Match by subject"
-          style={styles.criteria}
-          textStyle={{ fontSize: 15 }}
-        />
-        <MatchCriteria
-          isEnabled={matchByPersonality}
-          setIsEnabled={setMatchByPersonality}
-          title="Match by interests and personality"
-          style={styles.lastCriteria}
-          textStyle={{ fontSize: 15 }}
-        />
-      </View>
-      <NormalText style={styles.matchText}>Press to find a match</NormalText>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        style={{ flex: 1, width: "100%", alignItems: "center" }}
-        onPress={onPressHandler}
-      >
         {loading ? (
-          <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-          >
-            <ActivityIndicator size="large" />
-          </View>
+          <CircularProgress size={50} />
         ) : (
-          <Card style={styles.matchButton}>
-            <View style={{ alignItems: "center" }}>
-              <FontAwesome5 name="user-friends" size={95} color="white" />
-              <NormalText style={{ color: "white", fontSize: 70 }}>
-                unify
-              </NormalText>
-            </View>
-          </Card>
+          <StartButton className={classes.matchButton} onClick={onPressHandler}>
+            Find me a match
+          </StartButton>
         )}
-      </TouchableOpacity>
-    </View>
+      </div>
+      <Footer homeSelected={true} />
+    </div>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-  },
-  criteria: {
-    marginTop: 20,
-  },
-  lastCriteria: {
-    marginVertical: 20,
-  },
-  criteriaContainer: {
-    alignItems: "center",
-    marginTop: 20,
-    width: "80%",
-    borderBottomColor: "#d3d3d3",
-    borderBottomWidth: 1,
-  },
-  firstButton: {
-    backgroundColor: Colours.primary,
-    marginVertical: 20,
-  },
-  secondButton: {
-    borderColor: Colours.primary,
-    borderWidth: 1,
-    marginVertical: 20,
-  },
-  matchText: {
-    fontSize: 18,
-    color: "black",
-    marginTop: 30,
-  },
-  matchButton: {
-    flex: 0.95,
-    justifyContent: "center",
-    width: "80%",
-    marginTop: 30,
-  },
-});

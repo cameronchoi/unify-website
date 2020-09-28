@@ -4,7 +4,7 @@ import { createUseStyles } from "react-jss";
 import { FaUserFriends } from "react-icons/fa";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import StartButton from "../components/UI/StartButton";
+import StartButton from "../components/StartButton";
 
 import Cookies from "js-cookie";
 

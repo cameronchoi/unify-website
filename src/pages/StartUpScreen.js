@@ -1,68 +1,68 @@
-import React from 'react'
-import { createUseStyles } from 'react-jss'
-import { FaUserFriends } from 'react-icons/fa'
+import React from "react";
+import { createUseStyles } from "react-jss";
+import { FaUserFriends } from "react-icons/fa";
 
-import StartButton from '../components/UI/StartButton'
+import StartButton from "../components/StartButton";
 
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-import Colours from '../constants/colours'
+import Colours from "../constants/colours";
 
 const useStyles = createUseStyles({
   container: {
     backgroundColor: Colours.primary,
-    display: 'flex',
-    height: '100vh',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column'
+    display: "flex",
+    height: "100vh",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
   },
   logo: {
     flex: 5,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   logoTitle: {
-    color: 'white',
+    color: "white",
     fontSize: 40,
-    margin: 0
+    margin: 0,
   },
   buttons: {
     flex: 2,
-    display: 'flex',
-    flexDirection: 'column'
+    display: "flex",
+    flexDirection: "column",
   },
   signInButton: {
     marginTop: 20,
-    backgroundColor: 'white',
-    color: Colours.primary
+    backgroundColor: "white",
+    color: Colours.primary,
   },
   signUpButton: {
     marginTop: 20,
     backgroundColor: Colours.primary,
-    color: 'white'
-  }
-})
+    color: "white",
+  },
+});
 
-export default function StartUpScreen ({ navigation }) {
-  const classes = useStyles()
+export default function StartUpScreen({ navigation }) {
+  const classes = useStyles();
 
   return (
     <div className={classes.container}>
       <div className={classes.logo}>
-        <FaUserFriends size={90} color='white' />
+        <FaUserFriends size={90} color="white" />
         <h1 className={classes.logoTitle}>unify</h1>
       </div>
       <div className={classes.buttons}>
-        <Link to='/signin'>
+        <Link to="/signin">
           <StartButton className={classes.signInButton}>Sign in</StartButton>
         </Link>
-        <Link to='/signup-email'>
+        <Link to="/signup-email">
           <StartButton className={classes.signUpButton}>Sign up</StartButton>
         </Link>
       </div>
     </div>
-  )
+  );
 }
