@@ -23,7 +23,7 @@ const useStyles = createUseStyles({
   },
   contentContainer: {
     display: "flex",
-    height: "60%",
+    height: "80%",
     flexDirection: "column",
     justifyContent: "space-around",
     alignItems: "center",
@@ -32,6 +32,7 @@ const useStyles = createUseStyles({
     backgroundColor: Colours.primary,
     color: "white",
     fontSize: 25,
+    marginBottom: 20,
   },
   title: {
     fontSize: 30,
