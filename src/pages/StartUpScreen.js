@@ -1,18 +1,15 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 import { FaUserFriends } from "react-icons/fa";
-
 import StartButton from "../components/StartButton";
-
 import { Link } from "react-router-dom";
-
 import Colours from "../constants/colours";
+import Div100vh from "react-div-100vh";
 
 const useStyles = createUseStyles({
   container: {
     backgroundColor: Colours.primary,
     display: "flex",
-    height: "100vh",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
@@ -50,7 +47,7 @@ export default function StartUpScreen({ navigation }) {
   const classes = useStyles();
 
   return (
-    <div className={classes.container}>
+    <Div100vh className={classes.container}>
       <div className={classes.logo}>
         <FaUserFriends size={90} color="white" />
         <h1 className={classes.logoTitle}>unify</h1>
@@ -63,6 +60,6 @@ export default function StartUpScreen({ navigation }) {
           <StartButton className={classes.signUpButton}>Sign up</StartButton>
         </Link>
       </div>
-    </div>
+    </Div100vh>
   );
 }

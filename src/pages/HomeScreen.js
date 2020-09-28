@@ -13,9 +13,10 @@ import { CircularProgress } from "@material-ui/core";
 import StartButton from "../components/StartButton";
 import Footer from "../components/Footer";
 
+import Div100vh from "react-div-100vh";
+
 const useStyles = createUseStyles({
   mainContainer: {
-    height: "100vh",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -41,60 +42,57 @@ export default function HomeScreen({ navigation }) {
   const classes = useStyles();
   const [state] = useContext(AuthContext);
   const [modalOpen, setModalOpen] = useState(false);
-  const [matchByDegree, setMatchByDegree] = useState(true);
-  const [matchBySubject, setMatchBySubject] = useState(true);
-  const [matchByPersonality, setMatchByPersonality] = useState(true);
   const [loading, setLoading] = useState(false);
   const [fullName, setFullName] = useState("");
   const [uri, setUri] = useState("");
 
   const onPressHandler = () => {
     setLoading(true);
-    console.log(matchByDegree);
-    console.log(matchBySubject);
-    console.log(matchByPersonality);
-    console.log(state.userToken);
-    fetch(`${baseUrl.au}/match`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${state.userToken}`,
-      },
-      body: JSON.stringify({
-        degree: matchByDegree,
-        subject: matchBySubject,
-        personality: matchByPersonality,
-      }),
-    })
-      .then((res) => res.json())
-      .then((resData) => {
-        console.log(resData);
-        if (resData.error) {
-          setLoading(false);
-          alert(resData.error);
-        } else {
-          let fullName = `${resData.result.firstName} ${resData.result.lastName}`;
-          let uri = `https://avataaars.io/png?topType=${resData.result.avatar.topType}&hairColor=${resData.result.avatar.hairColour}&clotheType=${resData.result.avatar.clotheType}&skinColor=${resData.result.avatar.skinColour}&avatarStyle=Circle`;
-          //   matchDispatch({
-          //     type: "SET_MATCH",
-          //     email: resData.result.email,
-          //     fullName,
-          //     id: resData.id,
-          //     uri,
-          //   });
-          setFullName(fullName);
-          setUri(uri);
-          setLoading(false);
-          setModalOpen(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // console.log(matchByDegree);
+    // console.log(matchBySubject);
+    // console.log(matchByPersonality);
+    // console.log(state.userToken);
+    // fetch(`${baseUrl.au}/match`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${state.userToken}`,
+    //   },
+    //   body: JSON.stringify({
+    //     degree: matchByDegree,
+    //     subject: matchBySubject,
+    //     personality: matchByPersonality,
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((resData) => {
+    //     console.log(resData);
+    //     if (resData.error) {
+    //       setLoading(false);
+    //       alert(resData.error);
+    //     } else {
+    //       let fullName = `${resData.result.firstName} ${resData.result.lastName}`;
+    //       let uri = `https://avataaars.io/png?topType=${resData.result.avatar.topType}&hairColor=${resData.result.avatar.hairColour}&clotheType=${resData.result.avatar.clotheType}&skinColor=${resData.result.avatar.skinColour}&avatarStyle=Circle`;
+    //       //   matchDispatch({
+    //       //     type: "SET_MATCH",
+    //       //     email: resData.result.email,
+    //       //     fullName,
+    //       //     id: resData.id,
+    //       //     uri,
+    //       //   });
+    //       setFullName(fullName);
+    //       setUri(uri);
+    //       setLoading(false);
+    //       setModalOpen(true);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (
-    <div className={classes.mainContainer}>
+    <Div100vh className={classes.mainContainer}>
       <Header />
       <div className={classes.contentContainer}>
         <div className={classes.title}>Hi, Cameron!</div>
@@ -121,6 +119,6 @@ export default function HomeScreen({ navigation }) {
         )}
       </div>
       <Footer homeSelected={true} />
-    </div>
+    </Div100vh>
   );
 }

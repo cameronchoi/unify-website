@@ -10,7 +10,6 @@ const useStyles = createUseStyles({
   container: {
     backgroundColor: Colours.primary,
     display: "flex",
-    height: "100vh",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",

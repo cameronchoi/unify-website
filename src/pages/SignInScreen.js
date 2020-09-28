@@ -12,12 +12,12 @@ import Colours from "../constants/colours";
 import baseUrl from "../constants/baseUrl";
 
 import { AuthContext } from "../contexts/AuthContext";
+import Div100vh from "react-div-100vh";
 
 const useStyles = createUseStyles({
   container: {
     display: "flex",
     flexDirection: "column",
-    height: "100vh",
     // alignItems: 'center'
   },
   logo: {
@@ -98,7 +98,7 @@ const SignInScreen = (props) => {
   };
 
   return (
-    <div className={classes.container}>
+    <Div100vh className={classes.container}>
       <div className={classes.logo}>
         <FaUserFriends size={90} color="white" />
         <h1 className={classes.logoTitle}>unify</h1>
@@ -136,7 +136,7 @@ const SignInScreen = (props) => {
           </StartButton>
         )}
       </div>
-    </div>
+    </Div100vh>
   );
 };
 

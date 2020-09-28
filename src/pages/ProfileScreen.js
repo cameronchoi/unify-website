@@ -1,12 +1,12 @@
 import React from "react";
 import Footer from "../components/Footer";
+import Div100vh from "react-div-100vh";
 
 import { createUseStyles } from "react-jss";
 import Header from "../components/Header";
 
 const useStyles = createUseStyles({
   mainContainer: {
-    height: "100vh",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -23,13 +23,13 @@ const ProfileScreen = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.mainContainer}>
+    <Div100vh className={classes.mainContainer}>
       <Header />
       <div className={classes.contentContainer}>
         <h1>This is the profile screen</h1>
       </div>
       <Footer profileSelected={true} />
-    </div>
+    </Div100vh>
   );
 };
 
