@@ -12,7 +12,7 @@ const useStyles = createUseStyles({
     justifyContent: "center",
   },
   nameText: {
-    fontWeight: 600,
+    fontWeight: 700,
     marginBottom: 10,
   },
 });

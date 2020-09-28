@@ -9,6 +9,9 @@ const useStyles = createUseStyles({
     justifyContent: "center",
     alignItems: "center",
   },
+  nameText: {
+    fontWeight: 600,
+  },
 });
 
 const NewMatch = () => {
@@ -16,7 +19,8 @@ const NewMatch = () => {
   return (
     <div className={classes.container}>
       <Avatar
-        style={{ width: 90, height: 90 }}
+        style={{ height: 90, width: 90 }}
+        // className={classes.avatar}
         avatarStyle="Circle"
         topType="LongHairMiaWallace"
         accessoriesType="Prescription02"
@@ -29,7 +33,7 @@ const NewMatch = () => {
         mouthType="Smile"
         skinColor="Light"
       />
-      <div>James</div>
+      <div className={classes.nameText}>James</div>
     </div>
   );
 };

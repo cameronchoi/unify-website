@@ -20,8 +20,9 @@ const useStyles = createUseStyles({
   },
   matchesScroll: {
     display: "flex",
-    overflow: "auto",
-    whiteSpace: "nowrap",
+    flexShrink: 0,
+    width: "100vw",
+    overflowX: "auto",
     marginBottom: 15,
   },
   matchesText: {
@@ -41,6 +42,8 @@ const MatchesScreen = () => {
       <div className={classes.contentContainer}>
         <div className={classes.matchesText}>New Matches</div>
         <div className={classes.matchesScroll}>
+          <NewMatch />
+          <NewMatch />
           <NewMatch />
           <NewMatch />
           <NewMatch />
