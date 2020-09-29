@@ -10,6 +10,7 @@ import SignInScreen from "./pages/SignInScreen";
 import HomeScreen from "./pages/HomeScreen";
 import ProfileScreen from "./pages/ProfileScreen";
 import MatchesScreen from "./pages/MatchesScreen";
+import MessagingScreen from "./pages/MessagingScreen";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <ProtectedRoute exact path="/" component={HomeScreen} />
           <ProtectedRoute exact path="/profile" component={ProfileScreen} />
           <ProtectedRoute exact path="/matches" component={MatchesScreen} />
+          <ProtectedRoute exact path="/messages" component={MessagingScreen} />
 
           {/* <Route path='*' component={NotFound} /> */}
         </Switch>
