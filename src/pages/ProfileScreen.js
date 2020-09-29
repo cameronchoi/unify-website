@@ -26,7 +26,7 @@ const ProfileScreen = () => {
     <Div100vh className={classes.mainContainer}>
       <Header />
       <div className={classes.contentContainer}>
-        <h1>This is the profile screen</h1>
+        <h1>Profile screen</h1>
       </div>
       <Footer profileSelected={true} />
     </Div100vh>

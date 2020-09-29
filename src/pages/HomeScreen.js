@@ -9,6 +9,7 @@ import Colours from "../constants/colours";
 import baseUrl from "../constants/baseUrl";
 
 import { CircularProgress, Dialog, Slide } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import StartButton from "../components/StartButton";
 import Footer from "../components/Footer";
@@ -160,9 +161,14 @@ export default function HomeScreen({ navigation }) {
             skinColor="Light"
           />
           <div className={classes.modalText}>Bob Smith</div>
-          <StartButton className={classes.messageButton}>
-            Send them a message
-          </StartButton>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <StartButton className={classes.messageButton}>
+              Send them a message
+            </StartButton>
+          </Link>
           <StartButton className={classes.homeButton} onClick={handleClose}>
             Go back to home screen
           </StartButton>

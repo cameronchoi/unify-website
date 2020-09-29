@@ -6,6 +6,7 @@ import Div100vh from "react-div-100vh";
 import NewMatch from "../components/NewMatch";
 import Colours from "../constants/colours";
 import Conversation from "../components/Conversation";
+import { Link } from "react-router-dom";
 
 const useStyles = createUseStyles({
   mainContainer: {
@@ -42,24 +43,99 @@ const MatchesScreen = () => {
       <div className={classes.contentContainer}>
         <div className={classes.matchesText}>New Matches</div>
         <div className={classes.matchesScroll}>
-          <NewMatch />
-          <NewMatch />
-          <NewMatch />
-          <NewMatch />
-          <NewMatch />
-          <NewMatch />
-          <NewMatch />
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <NewMatch />
+          </Link>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <NewMatch />
+          </Link>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <NewMatch />
+          </Link>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <NewMatch />
+          </Link>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <NewMatch />
+          </Link>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <NewMatch />
+          </Link>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <NewMatch />
+          </Link>
         </div>
         <div className={classes.matchesText}>Conversations</div>
         <div className={classes.conversationScroll}>
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <Conversation />
+          </Link>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <Conversation />
+          </Link>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <Conversation />
+          </Link>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <Conversation />
+          </Link>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <Conversation />
+          </Link>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <Conversation />
+          </Link>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <Conversation />
+          </Link>
+          <Link
+            to="/messages"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <Conversation />
+          </Link>
         </div>
       </div>
       <Footer matchesSelected={true} />
