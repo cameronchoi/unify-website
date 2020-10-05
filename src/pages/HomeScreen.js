@@ -1,9 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, forwardRef, useEffect } from "react";
 import Avatar from "avataaars";
 import Header from "../components/Header";
 import { createUseStyles } from "react-jss";
 
 import { AuthContext } from "../contexts/AuthContext";
+import Cookies from "js-cookie";
 
 import Colours from "../constants/colours";
 import baseUrl from "../constants/baseUrl";
@@ -64,28 +65,60 @@ const useStyles = createUseStyles({
     borderWidth: 1,
     marginBottom: 20,
   },
+  pageLoader: {},
 });
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function HomeScreen({ navigation }) {
   const classes = useStyles();
   const [state] = useContext(AuthContext);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [matchLoading, setMatchLoading] = useState(false);
   const [fullName, setFullName] = useState("");
   const [uri, setUri] = useState("");
 
-  const onPressHandler = () => {
+  const [topType, setTopType] = useState("");
+  const [hairColour, setHairColour] = useState("");
+  const [clotheType, setClotheType] = useState("");
+  const [skinColour, setSkinColour] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  useEffect(() => {
     setLoading(true);
+
+    const token = Cookies.get("userToken");
+    fetch(`${baseUrl.au}/user`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((resData) => {
+        console.log(resData);
+        setTopType(resData.avatar.topType);
+        setHairColour(resData.avatar.hairColour);
+        setClotheType(resData.avatar.clotheType);
+        setSkinColour(resData.avatar.skinColour);
+        setFirstName(resData.firstName);
+        setLastName(resData.lastName);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Something wrong happened...");
+        setLoading(false);
+      });
+  }, []);
+
+  const onPressHandler = () => {
+    setMatchLoading(true);
     setOpen(true);
-    setLoading(false);
-    // console.log(matchByDegree);
-    // console.log(matchBySubject);
-    // console.log(matchByPersonality);
-    // console.log(state.userToken);
+    setMatchLoading(false);
     // fetch(`${baseUrl.au}/match`, {
     //   method: "POST",
     //   headers: {
@@ -175,30 +208,33 @@ export default function HomeScreen({ navigation }) {
         </Div100vh>
       </Dialog>
       <Header />
-      <div className={classes.contentContainer}>
-        <div className={classes.title}>Hi, Cameron!</div>
-        <Avatar
-          style={{ width: 250, height: 250, marginBottom: 25 }}
-          avatarStyle="Circle"
-          topType="LongHairMiaWallace"
-          accessoriesType="Prescription02"
-          hairColor="BrownDark"
-          facialHairType="Blank"
-          clotheType="Hoodie"
-          clotheColor="PastelBlue"
-          eyeType="Happy"
-          eyebrowType="Default"
-          mouthType="Smile"
-          skinColor="Light"
-        />
-        {loading ? (
+      {loading ? (
+        <div className={classes.contentContainer}>
           <CircularProgress size={50} />
-        ) : (
-          <StartButton className={classes.matchButton} onClick={onPressHandler}>
-            Find me a match
-          </StartButton>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className={classes.contentContainer}>
+          <div className={classes.title}>{`Hi, ${firstName}!`}</div>
+          <Avatar
+            style={{ width: 250, height: 250, marginBottom: 25 }}
+            avatarStyle="Circle"
+            topType={topType}
+            hairColor={hairColour}
+            clotheType={clotheType}
+            skinColor={skinColour}
+          />
+          {matchLoading ? (
+            <CircularProgress size={50} />
+          ) : (
+            <StartButton
+              className={classes.matchButton}
+              onClick={onPressHandler}
+            >
+              Find me a match
+            </StartButton>
+          )}
+        </div>
+      )}
       <Footer homeSelected={true} />
     </Div100vh>
   );

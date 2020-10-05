@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { IconButton, InputBase } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import { createUseStyles } from "react-jss";
@@ -17,12 +17,31 @@ const useStyles = createUseStyles({
   },
 });
 
-const MessagingInput = () => {
+const MessagingInput = ({ onClick }) => {
+  const [message, setMessage] = useState("");
   const classes = useStyles();
+
+  const onClickHandler = () => {
+    const sendMessage = {
+      position: "right",
+      type: "text",
+      text: message,
+      date: new Date(),
+    };
+    onClick(sendMessage);
+    setMessage("");
+  };
+
   return (
     <div className={classes.form}>
-      <InputBase className={classes.input} placeholder="Type a message" />
+      <InputBase
+        className={classes.input}
+        placeholder="Type a message"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
       <IconButton
+        onClick={onClickHandler}
         type="submit"
         // className={classes.iconButton}
         aria-label="submit"

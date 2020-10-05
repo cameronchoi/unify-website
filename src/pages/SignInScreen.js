@@ -18,7 +18,6 @@ const useStyles = createUseStyles({
   container: {
     display: "flex",
     flexDirection: "column",
-    // alignItems: 'center'
   },
   logo: {
     flex: 2,
