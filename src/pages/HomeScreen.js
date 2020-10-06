@@ -99,7 +99,6 @@ export default function HomeScreen({ navigation }) {
     })
       .then((res) => res.json())
       .then((resData) => {
-        console.log(resData);
         setTopType(resData.avatar.topType);
         setHairColour(resData.avatar.hairColour);
         setClotheType(resData.avatar.clotheType);
